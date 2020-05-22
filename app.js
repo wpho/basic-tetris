@@ -22,6 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = 10;
     let timerId = null;
     let score = 0;
+    const colors = [
+        // '#400AAF',
+        // '#5600E3',
+        //'#9c9cff',
+        '#3bc3f7',//'#61cef9',
+        '#5600E3',
+        '#7F29FF',
+        '#F53CFF',
+        '#61DFFF' //'#85e7fc' 
+    ]
 
     // The Tetrominoes
     const lTetromino = [
@@ -74,12 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.add('tetromino');
+            squares[currentPosition + index].style.backgroundColor = colors[random];
         });
     }
 
     function undraw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.remove('tetromino');
+            squares[currentPosition + index].style.backgroundColor = '';
         });
     }
 
@@ -120,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             draw();
             displayShape();
             addScore();
+            gameOver();
         }
     }
 
@@ -187,9 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // remove any trace of a tetromino form the entire grid
         displaySquares.forEach(square => {
             square.classList.remove('tetromino');
+            square.style.backgroundColor = ''
         });
         upNextTetrominoes[nextRandom].forEach(index => {
             displaySquares[displayIndex + index].classList.add('tetromino');
+            displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom];
         });
     }
 
@@ -217,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.forEach(index => {
                     squares[index].classList.remove('taken');
                     squares[index].classList.remove('tetromino');
+                    squares[index].style.backgroundColor = '';
                 });
                 const squaresRemoved = squares.splice(i, width);
                 squares = squaresRemoved.concat(squares);
@@ -225,5 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // game over
+    function gameOver() {
+        if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            document.getElementsByClassName('container')[0].innerHTML += '<div id="result">Game Over</div>';
+            clearInterval(timerId);
+        }
+    }
 
 });
