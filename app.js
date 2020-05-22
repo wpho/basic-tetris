@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
         miniGridContainer.innerHTML += '<div></div>';
     }
 
+    console.log(document.getElementsByClassName('container')[0].innerHTML);
+
     const grid = document.querySelector('.grid');
     let squares = Array.from(document.querySelectorAll('.grid div'));
     const ScoreDisplay = document.querySelector('#score');
@@ -35,14 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const tTetromino = [
-        [1, width, width + 1, width + 2], [1, width + 1, width + 2, width * 2 + 1],
+        [1, width, width + 1, width + 2], 
+        [1, width + 1, width + 2, width * 2 + 1],
         [width, width + 1, width + 2, width * 2 + 1],
         [1, width, width + 1, width * 2 + 1]
     ];
 
     const oTetromino = [
-        [0, 1, width, width + 1], [0, 1, width, width + 1],
-        [0, 1, width, width + 1], [0, 1, width, width + 1]
+        [0, 1, width, width + 1], 
+        [0, 1, width, width + 1],
+        [0, 1, width, width + 1], 
+        [0, 1, width, width + 1]
     ];
 
     const iTetromino = [
@@ -161,17 +166,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // show up next tetromino in mini-grid display
-    const displaySquares = document.querySelectorAll('mini-grid div');
+    const displaySquares = document.querySelectorAll('.mini-grid div');
     const displayWidth = 4;
     let displayIndex = 0;
 
     // the Tetrominos without rotations
     const upNextTetrominoes = [
-        [1, width + 1, width * 2 + 1, 2], // l-tetromino
-        [0, width, width + 1, width * 2 + 1], // z-tetromino
-        [1, width, width + 1, width + 2], [1, width + 1, width + 2, width * 2 + 1], // t-tetromino
-        [0, 1, width, width + 1], [0, 1, width, width + 1], // o-tetromino
-        [1, width + 1, width * 2 + 1, width * 3 + 1], //i-tetromino
+        [1, displayWidth + 1, displayWidth * 2 + 1, 2], // l-tetromino
+        [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1], // z-tetromino
+        [1, displayWidth, displayWidth + 1, displayWidth + 2],  // t-tetromino
+        [0, 1, displayWidth, displayWidth + 1],  // o-tetromino
+        [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1], //i-tetromino
     ];
 
     // display the shape in the mini-grid display
