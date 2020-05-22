@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         miniGridContainer.innerHTML += '<div></div>';
     }
 
+    document.getElementById('mobile-msg-btn').addEventListener('click', function() {
+        if (document.getElementById('mobile-arrows').style.visibility === 'hidden') {
+            document.getElementById('mobile-arrows').style.visibility = 'visible';
+        } else {
+            document.getElementById('mobile-arrows').style.visibility = 'hidden';
+        }
+    });
+
     console.log(document.getElementsByClassName('container')[0].innerHTML);
 
     const grid = document.querySelector('.grid');
@@ -110,7 +118,19 @@ document.addEventListener('DOMContentLoaded', () => {
             moveDown();
         }
     }
-    document.addEventListener('keyup', control)
+    document.addEventListener('keyup', control);
+    document.getElementById('left-arrow').addEventListener('click', function() {
+        moveLeft();
+    });
+    document.getElementById('right-arrow').addEventListener('click', function() {
+        moveRight();
+    });
+    document.getElementById('up-arrow').addEventListener('click', function() {
+        rotate();
+    });
+    document.getElementById('down-arrow').addEventListener('click', function() {
+        moveDown();
+    });
 
     // move down function
     function moveDown() {
